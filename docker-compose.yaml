@@ -1,0 +1,38 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: laba5_nginx
+    restart: unless-stopped
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    networks:
+      - laba5_net
+
+  php:
+    build:
+      context: php/
+    restart: unless-stopped
+    container_name: laba5_php
+    networks:
+      - laba5_net
+
+  python:
+    build:
+      context: python/
+    restart: unless-stopped
+    networks:
+      - laba5_net
+
+  node:
+    build:
+      context: node/
+    restart: unless-stopped
+    networks:
+      - laba5_net
+
+networks:
+  laba5_net:
+    driver: bridge
+    external: true
