@@ -19,12 +19,12 @@ def ping_localhost_80(N: int) -> Dict[str, int]:
 
             data = response.json()
 
+            print(data)
+
             servers.append(data['language'])
 
             if i % 10 == 0:
                 print(f"Обработано: {i}/{N} запросов")
-
-            time.sleep(delay)
 
         except requests.exceptions.RequestException as re:
             failed += 1

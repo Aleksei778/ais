@@ -5,16 +5,19 @@ services:
     restart: unless-stopped
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
     ports:
       - "80:80"
     networks:
       - laba5_net
 
-  php:
+  go:
     build:
-      context: php/
+      context: go/
     restart: unless-stopped
-    container_name: laba5_php
+    container_name: laba5_go
+    ports:
+      - "8080:8080"
     networks:
       - laba5_net
 
@@ -22,6 +25,7 @@ services:
     build:
       context: python/
     restart: unless-stopped
+    container_name: laba5_python
     networks:
       - laba5_net
 
@@ -29,6 +33,7 @@ services:
     build:
       context: node/
     restart: unless-stopped
+    container_name: laba5_node
     networks:
       - laba5_net
 
